@@ -1,0 +1,38 @@
+# Dependencias de Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Hardhat y artefactos de compilación
+artifacts/
+cache/
+typechain/
+typechain-types/
+
+# Variables de entorno secretas (NUNCA SUBIR A GIT)
+.env
+
+# Cobertura y reportes de pruebas
+coverage/
+coverage.json
+
+# Builds y cachés de frontend
+client/dist/
+client/.vite/
+client/node_modules/
+*.bak*
+
+# Sistema operativo y editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+cloudflared.exe
+
+.env
+firebase-key.json
+node_modules/
+artifacts/
+cache/
+dist/

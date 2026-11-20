@@ -1,0 +1,9 @@
+{
+  "appId": "com.upec.web3",
+  "appName": "UPEC Web3",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}

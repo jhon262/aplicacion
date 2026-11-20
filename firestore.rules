@@ -1,0 +1,38 @@
+rules_version = '2';
+// Reglas de Firestore del prototipo UPEC.
+// Firestore guarda solo datos personales (perfil, nombre y cédula del graduando, calificación).
+// Estado, votos y certificado viven en el contrato ProjectRegistry; aquí no se pueden alterar.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function profile() { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data; }
+    function isAdmin() { return signedIn() && profile().role == 'admin'; }
+    function isStaff() { return signedIn() && profile().role in ['admin', 'docente']; }
+
+    // Perfiles: cada persona lee y edita el suyo; Secretaría gestiona todos.
+    // Nadie puede cambiarse el rol a sí mismo.
+    match /users/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || isStaff());
+      allow create: if signedIn() && request.auth.uid == uid && request.resource.data.role == 'student';
+      allow update: if isAdmin() ||
+        (signedIn() && request.auth.uid == uid && request.resource.data.role == resource.data.role);
+      allow delete: if isAdmin();
+    }
+
+    // Datos personales de cada trabajo, con id = hash SHA-256 del PDF.
+    match /projects/{documentHash} {
+      allow read: if signedIn();
+      allow create: if signedIn() && request.resource.data.ownerUid == request.auth.uid;
+      allow update: if isAdmin() || (signedIn() && resource.data.ownerUid == request.auth.uid);
+      allow delete: if isAdmin() || (signedIn() && resource.data.ownerUid == request.auth.uid);
+    }
+
+    // Bitácora de transacciones (hash de la tx). Solo se agrega, no se edita.
+    match /transactions/{txId} {
+      allow read: if isStaff();
+      allow create: if signedIn();
+      allow update, delete: if false;
+    }
+  }
+}

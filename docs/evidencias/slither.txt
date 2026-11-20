@@ -1,0 +1,68 @@
+Problem executing hardhat: ◇ injected env (0) from .env
+◇ injected env (0) from .env
+
+INFO:Detectors:
+Detector: timestamp
+ProjectRegistry.vote(uint256,bool) (contracts/ProjectRegistry.sol#217-239) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp > p.votingDeadline (contracts/ProjectRegistry.sol#221)
+ProjectRegistry.finalizeProject(uint256) (contracts/ProjectRegistry.sol#244-251) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp <= p.votingDeadline (contracts/ProjectRegistry.sol#248)
+PurchaseEscrow.releasePaymentTimeout(uint256) (contracts/PurchaseEscrow.sol#264-275) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp <= ag.inspectionDeadline (contracts/PurchaseEscrow.sol#267)
+PurchaseEscrow.cancelAndRefund(uint256) (contracts/PurchaseEscrow.sol#288-310) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp <= ag.deliveryDeadline (contracts/PurchaseEscrow.sol#299)
+UPECToken.requestFaucetTokens() (contracts/UPECToken.sol#102-115) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < nextAllowedTime (contracts/UPECToken.sol#107)
+UPECToken.getRemainingFaucetCooldown(address) (contracts/UPECToken.sol#122-131) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= nextAllowedTime (contracts/UPECToken.sol#126)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+INFO:Detectors:
+Detector: pragma
+7 different versions of Solidity are used:
+	- Version constraint ^0.8.20 is used by:
+		-^0.8.20 (node_modules/@openzeppelin/contracts/access/AccessControl.sol#4)
+		-^0.8.20 (node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol#4)
+		-^0.8.20 (node_modules/@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol#4)
+		-^0.8.20 (node_modules/@openzeppelin/contracts/token/ERC721/utils/ERC721Utils.sol#4)
+		-^0.8.20 (node_modules/@openzeppelin/contracts/utils/Context.sol#4)
+		-^0.8.20 (node_modules/@openzeppelin/contracts/utils/Panic.sol#4)
+		-^0.8.20 (node_modules/@openzeppelin/contracts/utils/ReentrancyGuard.sol#4)
+		-^0.8.20 (node_modules/@openzeppelin/contracts/utils/StorageSlot.sol#5)
+		-^0.8.20 (node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol#4)
+		-^0.8.20 (node_modules/@openzeppelin/contracts/utils/math/Math.sol#4)
+		-^0.8.20 (node_modules/@openzeppelin/contracts/utils/math/SafeCast.sol#5)
+		-^0.8.20 (node_modules/@openzeppelin/contracts/utils/math/SignedMath.sol#4)
+	- Version constraint >=0.8.4 is used by:
+		->=0.8.4 (node_modules/@openzeppelin/contracts/access/IAccessControl.sol#4)
+		->=0.8.4 (node_modules/@openzeppelin/contracts/interfaces/draft-IERC6093.sol#4)
+	- Version constraint >=0.6.2 is used by:
+		->=0.6.2 (node_modules/@openzeppelin/contracts/interfaces/IERC1363.sol#4)
+		->=0.6.2 (node_modules/@openzeppelin/contracts/interfaces/IERC4906.sol#4)
+		->=0.6.2 (node_modules/@openzeppelin/contracts/interfaces/IERC721.sol#4)
+		->=0.6.2 (node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol#4)
+		->=0.6.2 (node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol#4)
+		->=0.6.2 (node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol#4)
+	- Version constraint >=0.4.16 is used by:
+		->=0.4.16 (node_modules/@openzeppelin/contracts/interfaces/IERC165.sol#4)
+		->=0.4.16 (node_modules/@openzeppelin/contracts/interfaces/IERC20.sol#4)
+		->=0.4.16 (node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol#4)
+		->=0.4.16 (node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol#4)
+	- Version constraint ^0.8.24 is used by:
+		-^0.8.24 (node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol#4)
+		-^0.8.24 (node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol#4)
+		-^0.8.24 (node_modules/@openzeppelin/contracts/utils/Bytes.sol#4)
+		-^0.8.24 (node_modules/@openzeppelin/contracts/utils/Strings.sol#4)
+	- Version constraint >=0.5.0 is used by:
+		->=0.5.0 (node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol#4)
+	- Version constraint ^0.8.28 is used by:
+		-^0.8.28 (contracts/ProjectRegistry.sol#2)
+		-^0.8.28 (contracts/PurchaseEscrow.sol#2)
+		-^0.8.28 (contracts/UPECToken.sol#2)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#different-pragma-directives-are-used
+INFO:Slither:. analyzed (31 contracts with 102 detectors), 7 result(s) found

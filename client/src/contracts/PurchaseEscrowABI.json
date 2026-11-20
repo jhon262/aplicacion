@@ -1,0 +1,972 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_upectToken",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "initialAdmin",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "AccessControlBadConfirmation",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "neededRole",
+        "type": "bytes32"
+      }
+    ],
+    "name": "AccessControlUnauthorizedAccount",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "AgreementNotFound",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "DeliveryDeadlineNotPassed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InspectionDeadlineActive",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidDisputeSplit",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidParties",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidPrice",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum PurchaseEscrow.AgreementState",
+        "name": "current",
+        "type": "uint8"
+      },
+      {
+        "internalType": "enum PurchaseEscrow.AgreementState",
+        "name": "expected",
+        "type": "uint8"
+      }
+    ],
+    "name": "InvalidState",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidTerms",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidTimePeriod",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ReentrancyGuardReentrantCall",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "name": "SafeERC20FailedOperation",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "UnauthorizedCaller",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ZeroAddressDetected",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "seller",
+        "type": "address"
+      }
+    ],
+    "name": "AgreementAccepted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "initiator",
+        "type": "address"
+      }
+    ],
+    "name": "AgreementCancelled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "buyer",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "seller",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "termsCID",
+        "type": "string"
+      }
+    ],
+    "name": "AgreementCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "buyer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "AgreementRefunded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "seller",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "deliveryProofCID",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "inspectionDeadline",
+        "type": "uint256"
+      }
+    ],
+    "name": "DeliveryRegistered",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "initiator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "reason",
+        "type": "string"
+      }
+    ],
+    "name": "DisputeRaised",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "mediator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "resolution",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "buyerRefund",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "sellerPayment",
+        "type": "uint256"
+      }
+    ],
+    "name": "DisputeResolved",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "buyer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "deliveryDeadline",
+        "type": "uint256"
+      }
+    ],
+    "name": "EscrowFunded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "recipient",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "PaymentReleased",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "buyer",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "seller",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      }
+    ],
+    "name": "ReceiptConfirmed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "previousAdminRole",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "newAdminRole",
+        "type": "bytes32"
+      }
+    ],
+    "name": "RoleAdminChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      }
+    ],
+    "name": "RoleGranted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      }
+    ],
+    "name": "RoleRevoked",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "DEFAULT_ADMIN_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "DEFAULT_INSPECTION_PERIOD",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MEDIATOR_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      }
+    ],
+    "name": "acceptAgreement",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "agreements",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "buyer",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "seller",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "termsCID",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "deliveryProofCID",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "deliveryDeadline",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "inspectionDeadline",
+        "type": "uint256"
+      },
+      {
+        "internalType": "enum PurchaseEscrow.AgreementState",
+        "name": "state",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "deliveryPeriod",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "createdAt",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "completedAt",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      }
+    ],
+    "name": "cancelAndRefund",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      }
+    ],
+    "name": "confirmReceipt",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "seller",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "termsCID",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "deliveryPeriodSeconds",
+        "type": "uint256"
+      }
+    ],
+    "name": "createAgreement",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      }
+    ],
+    "name": "depositEscrow",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getAgreement",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "buyer",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "seller",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "termsCID",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "deliveryProofCID",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "deliveryDeadline",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "inspectionDeadline",
+        "type": "uint256"
+      },
+      {
+        "internalType": "enum PurchaseEscrow.AgreementState",
+        "name": "state",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAgreementCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getRoleAdmin",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "getUserAgreements",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "grantRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "hasRole",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "reason",
+        "type": "string"
+      }
+    ],
+    "name": "raiseDispute",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "deliveryProofCID",
+        "type": "string"
+      }
+    ],
+    "name": "registerDelivery",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      }
+    ],
+    "name": "releasePaymentTimeout",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "callerConfirmation",
+        "type": "address"
+      }
+    ],
+    "name": "renounceRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "resolution",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "buyerRefund",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "sellerPayment",
+        "type": "uint256"
+      }
+    ],
+    "name": "resolveDispute",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "revokeRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes4",
+        "name": "interfaceId",
+        "type": "bytes4"
+      }
+    ],
+    "name": "supportsInterface",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "upectToken",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

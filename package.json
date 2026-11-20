@@ -1,0 +1,42 @@
+{
+  "name": "upec-web3-thesis",
+  "version": "1.0.0",
+  "description": "Arquitecturas descentralizadas con Web3 y Smart Contracts para la validación, trazabilidad y transferencia de datos digitales en la UPEC",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "node": "hardhat node --hostname 0.0.0.0 --port 8545",
+    "deploy:local": "hardhat run scripts/deploy.js --network localhost",
+    "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
+    "deploy:amoy": "hardhat run scripts/deploy.js --network polygonAmoy",
+    "preparar": "hardhat run scripts/preparar-todo.js --network localhost",
+    "dev": "npm --prefix client run dev",
+    "ipfs-proxy": "node server/ipfs-proxy.js",
+    "seed:firebase": "node scripts/seed-firebase.js",
+    "coverage": "hardhat coverage"
+  },
+  "keywords": [
+    "web3",
+    "solidity",
+    "hardhat",
+    "ethereum",
+    "polygon",
+    "ipfs",
+    "upec",
+    "dao",
+    "erc721"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.6.1",
+    "axios": "^1.20.0",
+    "dotenv": "^18.0.0",
+    "form-data": "^4.0.6"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.2",
+    "hardhat": "^2.29.1",
+    "firebase-admin": "^13.0.0"
+  }
+}

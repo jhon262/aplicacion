@@ -1,0 +1,12 @@
+A new version of Solhint is available: 6.2.5
+Please consider updating your Solhint package.
+
+contracts/PurchaseEscrow.sol
+  35:5  warning  Immutable variables name are set to be in capitalized SNAKE_CASE  immutable-vars-naming
+
+✖ 1 problem (0 errors, 1 warning)
+
+ -------------------------------------------------------------------------- 
+ ===> Join SOLHINT Community at: https://discord.com/invite/4TYGq3zpjs <=== 
+ -------------------------------------------------------------------------- 
+

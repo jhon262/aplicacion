@@ -1,0 +1,98 @@
+◇ injected env (0) from .env
+Compiled 32 Solidity files successfully (evm target: cancun).
+
+
+  ProjectRegistry - Sistema Web3 UPEC
+    1. Inicialización y roles
+      ✔ Debe configurar el nombre y el símbolo del certificado ERC-721
+      ✔ Debe asignar el rol de administración a Secretaría
+      ✔ Debe iniciar con 0 proyectos y un tribunal de 3 integrantes
+      ✔ Debe impedir que alguien sin rol de administración otorgue el rol docente
+    2. Registro, integridad del PDF y edición
+      ✔ Debe registrar un proyecto con su CID y el hash del PDF, y emitir el evento
+      ✔ Debe rechazar el registro sin título, sin CID o sin hash
+      ✔ Debe rechazar el registro de un PDF ya registrado (RF-11)
+      ✔ Debe verificar un PDF por su hash
+      ✔ Debe listar todos los proyectos registrados
+      ✔ Debe declarar soporte de las interfaces ERC-721 y AccessControl
+      ✔ Debe permitir al autor editar título y descripción antes del primer voto (RF-12)
+      ✔ Debe impedir la edición por terceros o después del primer voto
+    3. Asignación del tribunal
+      ✔ Debe permitir a Secretaría asignar tres docentes e iniciar el plazo de votación
+      ✔ Debe impedir que alguien sin rol de administración asigne el tribunal
+      ✔ Debe rechazar integrantes sin rol docente, repetidos o que sean el autor
+      ✔ Debe impedir asignar el tribunal dos veces
+    4. Votación del tribunal
+      ✔ Debe rechazar votos antes de asignar el tribunal
+      ✔ Debe permitir votar a cada integrante y emitir VoteCast
+      ✔ Debe rechazar el voto de un docente que no integra el tribunal
+      ✔ Debe rechazar el voto de cuentas externas y del autor
+      ✔ Debe impedir que un docente vote dos veces
+      ✔ Debe rechazar votos después del plazo
+    5. Aprobación unánime y certificado
+      ✔ Debe aprobar con los tres votos favorables y emitir el certificado al autor
+      ✔ Debe rechazar el proyecto con un solo voto en contra
+      ✔ Debe impedir votar en un proyecto ya rechazado
+      ✔ Debe rechazar por vencimiento si faltan votos y el plazo terminó
+      ✔ Debe impedir finalizar un proyecto ya procesado
+    6. Certificado intransferible (soulbound)
+      ✔ Debe impedir transferir el certificado
+      ✔ Debe impedir aprobaciones sobre el certificado
+      ✔ Debe exponer el URI del certificado con el CID de IPFS
+
+  PurchaseEscrow - Contratos de Compraventa con Custodia UPEC
+    1. Inicialización y Configuración de Custodia
+      ✔ Debe vincular correctamente el contrato de la moneda UPECT
+      ✔ Debe configurar adecuadamente los roles de administración y mediación
+      ✔ Debe iniciar con 0 acuerdos registrados
+    2. Ciclo Completo Exitoso de Compraventa (Happy Path)
+      ✔ Debe ejecutar el flujo completo: Crear -> Aceptar -> Depositar -> Entregar -> Confirmar -> Liberar
+    3. Cancelaciones y Reembolsos
+      ✔ Debe permitir cancelar el acuerdo antes del depósito sin movimiento de fondos
+      ✔ Debe permitir al comprador cancelar con 100% de reembolso si el vendedor no entrega en el plazo
+      ✔ Debe permitir al vendedor cancelar y reembolsar voluntariamente al comprador
+      ✔ Debe rechazar intentos de cancelación por parte de terceros no autorizados
+    4. Gestión de Disputas y Arbitraje Académico
+      ✔ Debe permitir al comprador o al vendedor abrir una disputa formal
+      ✔ Debe rechazar la resolución de disputas por personas sin MEDIATOR_ROLE
+      ✔ Debe resolver a favor del comprador con reembolso íntegro (Resolución 1)
+      ✔ Debe resolver a favor del vendedor con pago íntegro (Resolución 2)
+      ✔ Debe permitir un acuerdo de compensación parcial dividido (Resolución 3: e.g. 60/40)
+      ✔ Debe rechazar dictámenes donde la suma no iguale exactamente el monto depositado
+    5. Liberación por Vencimiento de Inspección (Timeout)
+      ✔ Debe rechazar la liberación si el plazo de inspección aún está vigente
+      ✔ Debe permitir al vendedor cobrar si el comprador no confirma ni disputa tras 3 días
+    6. Seguridad, Validaciones y Ausencia de Retiro Arbitrario por Admin
+      ✔ Debe rechazar la creación si el comprador y vendedor son la misma dirección
+      ✔ Debe rechazar acuerdos con precio cero o términos vacíos
+      ✔ Debe impedir confirmaciones dobles de pago
+      ✔ Garantía de custodia: El administrador NO puede retirar los fondos depositados por los usuarios
+      ✔ Debe registrar y listar adecuadamente los acuerdos de cada usuario
+
+  UPECToken - Moneda Académica ERC-20 UPEC
+    1. Inicialización y Configuración ERC-20
+      ✔ Debe configurar correctamente el nombre y símbolo del token
+      ✔ Debe asignar el suministro inicial al administrador
+      ✔ Debe conceder DEFAULT_ADMIN_ROLE y MINTER_ROLE al administrador inicial
+      ✔ Debe incluir el aviso académico de prototipo sin valor financiero
+    2. Emisión Restringida por Roles (Mint)
+      ✔ Debe permitir al minter autorizado emitir tokens a cualquier estudiante
+      ✔ Debe rechazar la emisión si el llamante no posee el MINTER_ROLE
+      ✔ Debe permitir al admin otorgar y revocar el MINTER_ROLE
+      ✔ Debe rechazar la emisión hacia la dirección cero o cantidad cero
+    3. Grifo Académico (Faucet) con Límites y Cooldown
+      ✔ Debe permitir a un estudiante solicitar tokens del Faucet exitosamente
+      ✔ Debe impedir solicitudes repetidas antes de que expire el tiempo de espera (cooldown)
+      ✔ Debe reportar correctamente el tiempo restante de cooldown
+      ✔ Debe permitir solicitar nuevamente una vez transcurrido el tiempo de cooldown
+      ✔ Debe permitir al admin reconfigurar los parámetros del Faucet
+      ✔ Debe rechazar la reconfiguración del Faucet por usuarios no autorizados
+    4. Transferencias y Operaciones Estándar ERC-20
+      ✔ Debe permitir transferencias directas entre usuarios
+      ✔ Debe rechazar transferencias que superen el saldo disponible
+      ✔ Debe permitir transferencias delegadas (approve y transferFrom)
+      ✔ Debe rechazar transferFrom si supera el allowance aprobado
+
+
+  69 passing (2s)
+

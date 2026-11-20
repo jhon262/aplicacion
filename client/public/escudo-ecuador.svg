@@ -1,0 +1,224 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 620" width="100%" height="100%">
+  <!-- Escudo de Armas Oficial de la República del Ecuador (Vectorial Heráldico) -->
+  <defs>
+    <!-- Gradientes Heráldicos -->
+    <linearGradient id="goldCondor" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a3728"/>
+      <stop offset="40%" stop-color="#2a1e17"/>
+      <stop offset="100%" stop-color="#140e0b"/>
+    </linearGradient>
+    <linearGradient id="sunGold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF275"/>
+      <stop offset="50%" stop-color="#FFB300"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <linearGradient id="skyBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#29B6F6"/>
+      <stop offset="60%" stop-color="#81D4FA"/>
+      <stop offset="100%" stop-color="#E1F5FE"/>
+    </linearGradient>
+    <linearGradient id="mountainSnow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="35%" stop-color="#E0E0E0"/>
+      <stop offset="70%" stop-color="#5D4037"/>
+      <stop offset="100%" stop-color="#2E7D32"/>
+    </linearGradient>
+    <linearGradient id="seaBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0277BD"/>
+      <stop offset="100%" stop-color="#01579B"/>
+    </linearGradient>
+    <linearGradient id="goldBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE082"/>
+      <stop offset="50%" stop-color="#FFA000"/>
+      <stop offset="100%" stop-color="#FF6F00"/>
+    </linearGradient>
+    <linearGradient id="silverFasces" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#B0BEC5"/>
+      <stop offset="50%" stop-color="#ECEFF1"/>
+      <stop offset="100%" stop-color="#78909C"/>
+    </linearGradient>
+    <filter id="shieldShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <g transform="translate(0, 10)">
+    <!-- 1. BANDERAS NACIONALES TRICOLORES (4 PABELLONES) -->
+    <!-- Banderas Izquierda -->
+    <g id="flagsLeft">
+      <!-- Bandera Posterior Izquierda -->
+      <path d="M 120 220 Q 50 180 30 260 Q 60 320 130 310 Z" fill="#FFD100"/>
+      <path d="M 125 250 Q 55 220 35 285 Q 65 335 135 325 Z" fill="#0072CE"/>
+      <path d="M 130 280 Q 60 260 40 310 Q 70 350 140 340 Z" fill="#ED1C24"/>
+
+      <!-- Bandera Delantera Izquierda -->
+      <path d="M 140 280 Q 60 270 45 370 Q 90 420 160 390 Z" fill="#FFD100"/>
+      <path d="M 145 320 Q 70 320 52 400 Q 95 435 165 410 Z" fill="#0072CE"/>
+      <path d="M 150 360 Q 80 370 60 430 Q 100 450 170 425 Z" fill="#ED1C24"/>
+
+      <!-- Asta de Bandera Izquierda -->
+      <line x1="160" y1="180" x2="60" y2="480" stroke="#8D6E63" stroke-width="4"/>
+      <polygon points="163,170 157,185 167,185" fill="#FFA000"/>
+      <line x1="180" y1="200" x2="80" y2="500" stroke="#8D6E63" stroke-width="4"/>
+      <polygon points="183,190 177,205 187,205" fill="#FFA000"/>
+    </g>
+
+    <!-- Banderas Derecha (Simétricas) -->
+    <g id="flagsRight" transform="translate(500, 0) scale(-1, 1)">
+      <!-- Bandera Posterior Derecha -->
+      <path d="M 120 220 Q 50 180 30 260 Q 60 320 130 310 Z" fill="#FFD100"/>
+      <path d="M 125 250 Q 55 220 35 285 Q 65 335 135 325 Z" fill="#0072CE"/>
+      <path d="M 130 280 Q 60 260 40 310 Q 70 350 140 340 Z" fill="#ED1C24"/>
+
+      <!-- Bandera Delantera Derecha -->
+      <path d="M 140 280 Q 60 270 45 370 Q 90 420 160 390 Z" fill="#FFD100"/>
+      <path d="M 145 320 Q 70 320 52 400 Q 95 435 165 410 Z" fill="#0072CE"/>
+      <path d="M 150 360 Q 80 370 60 430 Q 100 450 170 425 Z" fill="#ED1C24"/>
+
+      <!-- Asta de Bandera Derecha -->
+      <line x1="160" y1="180" x2="60" y2="480" stroke="#8D6E63" stroke-width="4"/>
+      <polygon points="163,170 157,185 167,185" fill="#FFA000"/>
+      <line x1="180" y1="200" x2="80" y2="500" stroke="#8D6E63" stroke-width="4"/>
+      <polygon points="183,190 177,205 187,205" fill="#FFA000"/>
+    </g>
+
+    <!-- RAMAS DE LAUREL (IZQ) Y PALMA (DER) -->
+    <!-- Laurel (Gloria) - Izquierda -->
+    <g id="laurelBranch" stroke="#2E7D32" stroke-width="2" fill="#388E3C">
+      <path d="M 145 420 Q 110 350 135 270" fill="none" stroke-width="3"/>
+      <ellipse cx="120" cy="280" rx="10" ry="5" transform="rotate(-30, 120, 280)"/>
+      <ellipse cx="140" cy="270" rx="10" ry="5" transform="rotate(20, 140, 270)"/>
+      <ellipse cx="115" cy="315" rx="11" ry="6" transform="rotate(-25, 115, 315)"/>
+      <ellipse cx="138" cy="310" rx="11" ry="6" transform="rotate(30, 138, 310)"/>
+      <ellipse cx="118" cy="355" rx="12" ry="6" transform="rotate(-15, 118, 355)"/>
+      <ellipse cx="142" cy="350" rx="12" ry="6" transform="rotate(35, 142, 350)"/>
+      <ellipse cx="125" cy="395" rx="12" ry="7" transform="rotate(-5, 125, 395)"/>
+      <ellipse cx="150" cy="390" rx="12" ry="7" transform="rotate(40, 150, 390)"/>
+    </g>
+
+    <!-- Palma (Paz) - Derecha -->
+    <g id="palmBranch" stroke="#2E7D32" stroke-width="2" fill="#4CAF50" transform="translate(500, 0) scale(-1, 1)">
+      <path d="M 145 420 Q 110 350 135 270" fill="none" stroke-width="3"/>
+      <path d="M 130 260 Q 100 250 85 240 Q 110 265 130 268" fill="#43A047"/>
+      <path d="M 125 290 Q 90 280 75 270 Q 105 295 125 298" fill="#43A047"/>
+      <path d="M 120 325 Q 85 315 65 305 Q 98 330 120 333" fill="#43A047"/>
+      <path d="M 120 360 Q 80 350 60 340 Q 95 365 120 368" fill="#43A047"/>
+      <path d="M 125 395 Q 85 385 65 375 Q 100 400 125 403" fill="#43A047"/>
+    </g>
+
+    <!-- 2. HACES CONSULARES (FASCES REPUBLICANAS) EN LA BASE -->
+    <g id="fasces" transform="translate(250, 475)">
+      <!-- Cilindro de varas de madera ligadas -->
+      <rect x="-65" y="-12" width="130" height="24" rx="4" fill="url(#silverFasces)" stroke="#546E7A" stroke-width="2"/>
+      <line x1="-50" y1="-12" x2="-50" y2="12" stroke="#B71C1C" stroke-width="3"/>
+      <line x1="-25" y1="-12" x2="-25" y2="12" stroke="#B71C1C" stroke-width="3"/>
+      <line x1="0" y1="-12" x2="0" y2="12" stroke="#B71C1C" stroke-width="3"/>
+      <line x1="25" y1="-12" x2="25" y2="12" stroke="#B71C1C" stroke-width="3"/>
+      <line x1="50" y1="-12" x2="50" y2="12" stroke="#B71C1C" stroke-width="3"/>
+      <!-- Hacha consular que emerge -->
+      <path d="M 60 -6 L 85 -24 Q 92 -6 85 12 L 60 6 Z" fill="#90A4AE" stroke="#37474F" stroke-width="2"/>
+    </g>
+
+    <!-- 3. CUERPO DEL ESCUDO OVALADO CENTRAL -->
+    <g id="ovalShield" filter="url(#shieldShadow)">
+      <!-- Marco Dorado Exterior -->
+      <ellipse cx="250" cy="310" rx="108" ry="142" fill="url(#goldBorder)" stroke="#B26A00" stroke-width="4"/>
+      <!-- Borde Interior Blanco / Relieve -->
+      <ellipse cx="250" cy="310" rx="98" ry="132" fill="#FFFFFF" stroke="#D7CCC8" stroke-width="2"/>
+
+      <!-- Contenido Interior del Óvalo recortado -->
+      <g clip-path="url(#shieldClip)">
+        <clipPath id="shieldClip">
+          <ellipse cx="250" cy="310" rx="96" ry="130"/>
+        </clipPath>
+
+        <!-- A. Cielo Azul Superior -->
+        <rect x="140" y="170" width="220" height="150" fill="url(#skyBlue)"/>
+
+        <!-- Sol Radiante de Oro -->
+        <g id="goldenSun" transform="translate(250, 235)">
+          <circle cx="0" cy="0" r="22" fill="url(#sunGold)"/>
+          <!-- Rayos solares -->
+          <g stroke="#FF8F00" stroke-width="3" stroke-linecap="round">
+            <line x1="0" y1="-24" x2="0" y2="-34"/>
+            <line x1="0" y1="24" x2="0" y2="34"/>
+            <line x1="-24" y1="0" x2="-34" y2="0"/>
+            <line x1="24" y1="0" x2="34" y2="0"/>
+            <line x1="-17" y1="-17" x2="-24" y2="-24"/>
+            <line x1="17" y1="-17" x2="24" y2="-24"/>
+            <line x1="-17" y1="17" x2="-24" y2="24"/>
+            <line x1="17" y1="17" x2="24" y2="24"/>
+          </g>
+          <!-- Rostro del Sol -->
+          <circle cx="-6" cy="-4" r="2.5" fill="#5D4037"/>
+          <circle cx="6" cy="-4" r="2.5" fill="#5D4037"/>
+          <path d="M -7 7 Q 0 12 7 7" stroke="#5D4037" stroke-width="2" fill="none"/>
+        </g>
+
+        <!-- Arco Zodíaco (Aries, Tauro, Géminis, Cáncer - Meses históricos de 1845) -->
+        <path d="M 155 255 Q 250 205 345 255" fill="none" stroke="#FFA000" stroke-width="12" stroke-linecap="round"/>
+        <path d="M 155 255 Q 250 205 345 255" fill="none" stroke="#FFF8E1" stroke-width="2" stroke-dasharray="8 12"/>
+
+        <!-- B. Monte Chimborazo Nevado -->
+        <polygon points="140,360 250,265 360,360" fill="url(#mountainSnow)"/>
+        <!-- Glaciar de Nieve Cumbre -->
+        <polygon points="230,285 250,265 270,285 260,295 250,290 240,295" fill="#FFFFFF"/>
+
+        <!-- C. Río Guayas Fluvial -->
+        <path d="M 140 350 Q 210 330 250 350 Q 290 330 360 350 L 360 450 L 140 450 Z" fill="url(#seaBlue)"/>
+        <path d="M 140 370 Q 210 350 250 370 Q 290 350 360 370" stroke="#81D4FA" stroke-width="3" fill="none"/>
+        <path d="M 140 395 Q 210 375 250 395 Q 290 375 360 395" stroke="#4FC3F7" stroke-width="3" fill="none"/>
+
+        <!-- D. Buque de Vapor "Guayas" (Primer buque a vapor de Sudamérica) -->
+        <g id="steamShip" transform="translate(250, 375)">
+          <!-- Casco -->
+          <path d="M -32 5 L 32 5 L 24 16 L -24 16 Z" fill="#2E7D32" stroke="#1B5E20" stroke-width="1.5"/>
+          <rect x="-16" y="-2" width="32" height="7" fill="#FFFFFF" rx="1"/>
+          <!-- Chimenea con humo -->
+          <rect x="-3" y="-12" width="6" height="11" fill="#D32F2F"/>
+          <ellipse cx="0" cy="-14" rx="4" ry="2" fill="#757575" opacity="0.7"/>
+          <ellipse cx="6" cy="-18" rx="6" ry="3" fill="#BDBDBD" opacity="0.6"/>
+          <!-- Palo de bandera / Caduceo de Mercurio (Comercio y Navegación) -->
+          <line x1="0" y1="-26" x2="0" y2="4" stroke="#FFA000" stroke-width="2"/>
+          <circle cx="0" cy="-27" r="2.5" fill="#FFD54F"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- 4. CÓNDOR ANDINO SUPREMO CON ALAS DESPLEGADAS -->
+    <g id="condor" transform="translate(250, 160)">
+      <!-- Sombra / Volumen de Alas -->
+      <!-- Ala Izquierda -->
+      <path d="M -15 -10 Q -80 -70 -170 -40 Q -120 -5 -60 15 Q -25 5 -10 5 Z" fill="url(#goldCondor)" stroke="#000000" stroke-width="2"/>
+      <path d="M -160 -35 Q -140 -20 -115 -10" stroke="#CFD8DC" stroke-width="2.5" fill="none"/>
+      <path d="M -135 -15 Q -115 -2 -95 6" stroke="#CFD8DC" stroke-width="2.5" fill="none"/>
+
+      <!-- Ala Derecha -->
+      <path d="M 15 -10 Q 80 -70 170 -40 Q 120 -5 60 15 Q 25 5 10 5 Z" fill="url(#goldCondor)" stroke="#000000" stroke-width="2"/>
+      <path d="M 160 -35 Q 140 -20 115 -10" stroke="#CFD8DC" stroke-width="2.5" fill="none"/>
+      <path d="M 135 -15 Q 115 -2 95 6" stroke="#CFD8DC" stroke-width="2.5" fill="none"/>
+
+      <!-- Cola del Cóndor -->
+      <path d="M -18 35 L 0 55 L 18 35 Z" fill="#212121"/>
+
+      <!-- Cuerpo y Pecho -->
+      <ellipse cx="0" cy="10" rx="20" ry="26" fill="#1C1512" stroke="#000000" stroke-width="1.5"/>
+
+      <!-- Collar de Plumas Blancas del Cóndor -->
+      <path d="M -16 -4 Q 0 8 16 -4 Q 10 -14 0 -10 Q -10 -14 -16 -4 Z" fill="#FFFFFF" stroke="#ECEFF1" stroke-width="1"/>
+
+      <!-- Cuello Rojo Carnoso -->
+      <path d="M -8 -8 L -6 -24 L 6 -24 L 8 -8 Z" fill="#C62828"/>
+
+      <!-- Cabeza Altiva mirando a la derecha (Poder y Soberanía) -->
+      <path d="M -8 -24 Q -2 -34 10 -28 Q 16 -24 22 -20 L 16 -16 Q 10 -18 4 -18 L -6 -18 Z" fill="#8E0000"/>
+      <!-- Pico Corvo de Oro -->
+      <path d="M 16 -22 L 25 -20 Q 22 -14 16 -16 Z" fill="#FFA000" stroke="#D84315" stroke-width="1"/>
+      <!-- Cresta del Cóndor Macho -->
+      <path d="M 0 -31 Q 6 -36 12 -28 Z" fill="#B71C1C"/>
+      <!-- Ojo -->
+      <circle cx="8" cy="-24" r="2" fill="#FFD600"/>
+      <circle cx="8.5" cy="-24" r="1" fill="#000000"/>
+    </g>
+  </g>
+</svg>
